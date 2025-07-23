@@ -5,7 +5,7 @@ import { faCircleUser } from '@fortawesome/free-solid-svg-icons/faCircleUser'
 
 const Navbar = () => {
   return (
-    <div className="fixed top-0 h-16 left-0 w-full grid grid-cols-6 lg:grid-cols-5 xl:grid-cols-4 2xl:grid-cols-3 p-2 border-b-3 border-lavender">
+    <div className="fixed top-0 h-16 left-0 w-full grid grid-cols-6 lg:grid-cols-5 xl:grid-cols-4 2xl:grid-cols-3 p-2 border-b-5 border-lavender">
         <div className='flex items-center justify-start'>
             {/* <img className="w-10 h-10" src={logo} alt="logo" /> */}
             <FontAwesomeIcon icon={faFlipboard} className="text-4xl" />
@@ -24,7 +24,7 @@ const Navbar = () => {
             </div>
         </form>
         <div className='flex items-center justify-end'>
-            <FontAwesomeIcon className='text-4xl text-nurple' icon={faCircleUser}/>
+            <FontAwesomeIcon className='text-4xl text-nurple hover:text-lightNurple duration-300 cursor-pointer' icon={faCircleUser}/>
         </div>
     </div>
   )

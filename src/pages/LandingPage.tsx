@@ -11,14 +11,14 @@ const LandingPage: React.FC = () => {
         <SideNav></SideNav>
         <div className='xl:w-4/5'>
           <div className='landingHeaderContainer flex justify-between items-end'>
-            <h1 className="text-md lg:text-2xl font-bold pl-6">FAVORITES</h1>
+            <h2 className="text-md lg:text-2xl font-bold pl-6">FAVORITES</h2>
           </div>
           <div className='favoritesCardContainer mt-6 flex gap-4 overflow-x-auto p-2'>
             <Card children={undefined}></Card>
             <Card children={undefined}></Card>
           </div>
           <div className='landingHeaderContainer flex justify-between items-end pt-8'>
-            <h1 className="text-md lg:text-2xl font-bold pl-6">YOUR BOARDS</h1>
+            <h2 className="text-md lg:text-2xl font-bold pl-6">YOUR BOARDS</h2>
             <Button className="bg-nurple text-white">Create</Button>
           </div>
           <div className="cardContainer mt-6 flex gap-4 overflow-x-auto p-2">

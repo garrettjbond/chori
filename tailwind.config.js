@@ -7,6 +7,12 @@ export default {
   ],
   theme: {
     extend: {
+      width: {
+        '75': '300px',
+      },
+      margin: {
+        '38': '152px',
+      },
     },
   },
   plugins: [],

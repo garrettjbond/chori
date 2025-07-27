@@ -17,8 +17,8 @@ const Taskbar = () => {
             <div className="flex items-center">
                 <span  className="md:hidden text-2xl pr-2"><FontAwesomeIcon icon={faEllipsis} />
                 </span>
-                <span  className="hidden md:block text-2xl pr-2 cursor-pointer hover:text-nurple duration-300"><FontAwesomeIcon icon={faFilter} /></span>
-                <Button size="small" className="hidden md:block bg-nurple text-white"><FontAwesomeIcon icon={faUserPlus} className="pr-1 text-sm"></FontAwesomeIcon>Share</Button>
+                <span  className="hidden md:block text-2xl pr-2 cursor-pointer hover:animate-pulse duration-300"><FontAwesomeIcon icon={faFilter} /></span>
+                <Button size="medium" className="hidden md:block bg-nurple text-white hover:bg-lightNurple duration-300 cursor-pointer"><FontAwesomeIcon icon={faUserPlus} className="pr-1 text-sm "></FontAwesomeIcon>Share</Button>
             </div>
         </div>
     )

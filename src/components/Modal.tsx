@@ -9,7 +9,7 @@
 // }
 
 // function Modal({ modalMessage, children, className, ...props }: ModalProps) {
-//     // const [isOpen, setIsOpen] = useState<boolean>(true)
+//     const [isOpen, setIsOpen] = useState<boolean>(true)
     
 //     return (
 //     <>

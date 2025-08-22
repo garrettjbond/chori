@@ -11,7 +11,7 @@ type CreateColumnProps = {
 function CreateColumn({ children, className, ...props }: CreateColumnProps) {
     const [showForm, setShowForm] = useState<boolean>(false);
 
-    function toggleColumnCreateForm() {
+    function toggleCreateColumnForm() {
         setShowForm(prev => !prev);
     }
 
@@ -28,7 +28,7 @@ function CreateColumn({ children, className, ...props }: CreateColumnProps) {
                         </Button>
                     </div>
                 </form>
-            ): <Button onClick={toggleColumnCreateForm} className="columnHeader cursor-pointer w-75 flex flex-shrink-0 font-semibold hover:text-nurple duration-300 bg-taskHeader border border-gray-300 px-3 rounded-md h-11 flex justify-between items-center">Create New Column <span className='font-bold text-xl'>+</span></Button>}
+            ): <Button onClick={toggleCreateColumnForm} className="columnHeader cursor-pointer w-75 flex flex-shrink-0 font-semibold hover:text-nurple duration-300 bg-taskHeader border border-gray-300 px-3 rounded-md h-11 flex justify-between items-center">Create New Column <span className='font-bold text-xl'>+</span></Button>}
         </div>
     );
 }

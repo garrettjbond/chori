@@ -30,8 +30,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
+html, body {
+  height: 100%;
   margin: 0;
+}
+
+body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -39,4 +43,5 @@ body {
 
 #root{
   width: 100%;
+  height: 100%;
 }

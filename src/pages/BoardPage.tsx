@@ -1,15 +1,15 @@
-
 import Navbar from '../components/Navbar';
 import Taskbar from '../components/Taskbar';
 import TaskColumn from '../components/TaskColumn';
 import CreateColumn from '../components/CreateColumn';
 import FooterNav from '../components/FooterNav';
-// import Modal from '../components/Modal';
+import TaskInfoModal from '../components/TaskInfoModal';
+import BoardSwitchModal from '../components/BoardSwitchModal';
 
 const BoardPage: React.FC = () => {
 
   return (
-    <div className="p-5 w-full">
+    <div className="p-5 w-full h-full">
       <Navbar />
       <Taskbar />
       <div className='pageContainer mt-38 flex flex-row overflow-x-auto gap-10'>
@@ -17,9 +17,10 @@ const BoardPage: React.FC = () => {
         <TaskColumn children={undefined}></TaskColumn>
         <TaskColumn children={undefined}></TaskColumn>
         <TaskColumn children={undefined}></TaskColumn>
-        <CreateColumn children={undefined}></CreateColumn>
+        <CreateColumn >Column</CreateColumn>
       </div>
-      {/* <Modal isOpen={false} modalMessage={'Hello World'} children={undefined}></Modal> */}
+      <TaskInfoModal isOpen={true} children={undefined}></TaskInfoModal>
+      <BoardSwitchModal isOpen={true} children={undefined}></BoardSwitchModal>
       <FooterNav children={undefined}></FooterNav>
     </div>
   );

@@ -24,9 +24,9 @@ function TaskColumn({ children, className, onTaskClick, ...props }: TaskColumnPr
                 <h2 contentEditable>Column Title</h2>
                 <FontAwesomeIcon icon={faEllipsis} className="hover:animate-pulse text-lg" />
             </div>
-            <Task onClick={onTaskClick} children={undefined}></Task>
-            <Task onClick={onTaskClick} children={undefined}></Task>
-            <Task onClick={onTaskClick} children={undefined}></Task>
+            <Task children={undefined}></Task>
+            <Task children={undefined}></Task>
+            <Task children={undefined}></Task>
             { showTaskForm ? (
                     <form className="rounded-md bg-taskBackground flex flex-col px-4 py-5">
                         <input type="text" placeholder={`Enter task name...`} className="pl-3 h-10 bg-white w-full rounded-sm" />

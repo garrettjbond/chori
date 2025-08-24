@@ -4,6 +4,7 @@ import Card from '../components/Card';
 import SideNav from '../components/SideNav';
 
 const LandingPage: React.FC = () => {
+
   return (
     <div className="p-5 w-full">
       <Navbar />
@@ -22,6 +23,9 @@ const LandingPage: React.FC = () => {
             <Button className="bg-nurple hover: text-white">Create</Button>
           </div>
           <div className="cardContainer mt-6 flex gap-4 overflow-x-auto p-2">
+            <Card children={undefined}></Card>
+            <Card children={undefined}></Card>
+            <Card children={undefined}></Card>
             <Card children={undefined}></Card>
             <Card children={undefined}></Card>
             <Card children={undefined}></Card>

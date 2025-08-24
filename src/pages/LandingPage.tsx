@@ -20,7 +20,7 @@ const LandingPage: React.FC = () => {
           </div>
           <div className='landingHeaderContainer flex justify-between items-end pt-8'>
             <h2 className="text-md lg:text-2xl font-bold pl-6">YOUR BOARDS</h2>
-            <Button className="bg-nurple hover: text-white">Create</Button>
+            <Button className="bg-nurple text-white hover:bg-lightNurple duration-300">Create</Button>
           </div>
           <div className="cardContainer mt-6 flex gap-4 overflow-x-auto p-2">
             <Card children={undefined}></Card>

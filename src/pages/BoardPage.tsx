@@ -9,7 +9,7 @@ import BoardSwitchModal from '../components/BoardSwitchModal';
 const BoardPage: React.FC = () => {
 
   return (
-    <div className="p-5 w-full h-full">
+    <div className="p-10 w-full h-full xl:px-70 lg:px-30 md:px-20">
       <Navbar />
       <Taskbar />
       <div className='pageContainer mt-38 flex flex-row overflow-x-auto gap-10'>

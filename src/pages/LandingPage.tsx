@@ -4,24 +4,30 @@ import Card from '../components/Card';
 import SideNav from '../components/SideNav';
 
 const LandingPage: React.FC = () => {
+
   return (
-    <div className="p-5 w-full">
+    <div className="p-10 w-full">
       <Navbar />
-      <div className='pageContainer mt-24 md:flex md:flex-row md:mx-auto md:w-5/9 gap-10'>
+      <div className='pageContainer mt-24 gap-10 xl:flex xl:mx-70 lg:mx-30 md:mx-20'>
         <SideNav></SideNav>
         <div className='xl:w-4/5'>
           <div className='landingHeaderContainer flex justify-between items-end'>
-            <h2 className="text-md lg:text-2xl font-bold pl-6">FAVORITES</h2>
+            <h2 className="text-lg lg:text-xl font-bold pl-6">FAVORITES</h2>
           </div>
-          <div className='favoritesCardContainer mt-6 flex gap-4 overflow-x-auto p-2'>
+          <div className='favoritesCardContainer mt-5 flex gap-4 overflow-x-auto p-2'>
+            <Card children={undefined}></Card>
+            <Card children={undefined}></Card>
             <Card children={undefined}></Card>
             <Card children={undefined}></Card>
           </div>
           <div className='landingHeaderContainer flex justify-between items-end pt-8'>
-            <h2 className="text-md lg:text-2xl font-bold pl-6">YOUR BOARDS</h2>
-            <Button className="bg-nurple hover: text-white">Create</Button>
+            <h2 className="text-lg lg:text-xl font-bold pl-6">YOUR BOARDS</h2>
+            <Button className="bg-nurple text-white hover:bg-lightNurple duration-300">Create</Button>
           </div>
-          <div className="cardContainer mt-6 flex gap-4 overflow-x-auto p-2">
+          <div className="cardContainer mt-5 flex gap-4 overflow-x-auto p-2">
+            <Card children={undefined}></Card>
+            <Card children={undefined}></Card>
+            <Card children={undefined}></Card>
             <Card children={undefined}></Card>
             <Card children={undefined}></Card>
             <Card children={undefined}></Card>

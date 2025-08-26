@@ -11,7 +11,7 @@ type ModalProps = {
 }
 
 function BoardSwitchModal({ children, className, ...props }: ModalProps) {
-    const [isOpen, setIsOpen] = useState<boolean>(true);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const [inputValue, setInputValue] = useState<string>("");
 
 
@@ -37,7 +37,7 @@ function BoardSwitchModal({ children, className, ...props }: ModalProps) {
                                 <div className='inputContainer relative flex-shrink-0 sm:mx-auto sm:w-3/4'>
                                     <input
                                         type="text"
-                                        className='pl-4 border border-lavender w-full h-9 rounded-full'
+                                        className='pl-4 border border-gray-300 w-full h-9 rounded-full'
                                         placeholder='Search your boards'
                                         value={inputValue}
                                         onChange={(e) => setInputValue(e.target.value)}

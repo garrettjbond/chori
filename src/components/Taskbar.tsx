@@ -4,7 +4,7 @@ import Button from "./Button"
 
 const Taskbar = () => {
     return (
-        <div className="fixed top-16 h-13 left-0 w-full pl-4 pr-2 lg:pl-8 lg:pr-6 border-b-5 border-lavender flex justify-between items-center">
+        <div className="fixed top-16 h-13 left-0 w-full pl-4 pr-2 border-b-5 border-lavender flex justify-between items-center xl:px-75 lg:px-35 md:px-25">
             <div className="flex items-center gap-2">
                 <p className="font-semibold">Board A</p>
                 <div className="hidden sm:block sm:flex gap-2">

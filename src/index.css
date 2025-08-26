@@ -49,6 +49,11 @@ body {
   height: 100%;
 }
 
+input:focus,
+textarea:focus {
+  @apply ring-2 ring-nurple border-lavender outline-none;
+}
+
 /* Custom scrollbar styles */
 @layer base {
   html {

@@ -16,8 +16,8 @@ const SideNav = () => {
                 <span className="pr-2"><FontAwesomeIcon icon={faWindowMaximize} /></span>Boards
             </Link>
             <hr className="text-ash" />
-            <SideNavItem>Board A</SideNavItem>
-            <SideNavItem>Board B</SideNavItem>
+            <SideNavItem>A</SideNavItem>
+            <SideNavItem>B</SideNavItem>
         </div>
     );
 };

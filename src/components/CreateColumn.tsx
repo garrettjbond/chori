@@ -4,11 +4,10 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 type CreateColumnProps = {
-    children: React.ReactNode;
     className?: string;
 }
 
-function CreateColumn({ children, className, ...props }: CreateColumnProps) {
+function CreateColumn({ className, ...props }: CreateColumnProps) {
     const [showForm, setShowForm] = useState<boolean>(false);
 
     function toggleCreateColumnForm() {
@@ -23,12 +22,12 @@ function CreateColumn({ children, className, ...props }: CreateColumnProps) {
                     <input type="text" placeholder="Enter column name..." className="pl-3 h-10 bg-white w-full rounded-sm" />
                     <div className="flex justify-between pt-5">
                         <Button className="bg-nurple text-white hover:bg-lightNurple duration-300">Add Column</Button>
-                        <Button size="custom" >
+                        <Button size="custom" onClick={toggleCreateColumnForm} >
                             <FontAwesomeIcon icon={faClose} className="hover:animate-pulse text-lg" />
                         </Button>
                     </div>
                 </form>
-            ): <Button onClick={toggleCreateColumnForm} className="columnHeader cursor-pointer w-75 flex flex-shrink-0 font-semibold hover:text-nurple duration-300 bg-taskHeader border border-gray-300 px-3 rounded-md h-11 flex justify-between items-center">Create New Column <span className='font-bold text-xl'>+</span></Button>}
+            ): <Button onClick={toggleCreateColumnForm} className="columnHeader cursor-pointer w-75 flex flex-shrink-0 font-semibold hover:text-nurple duration-300 bg-taskHeader px-3 rounded-md h-11 justify-start items-center"><span className='font-bold text-xl pr-2'>+</span>Create New Column</Button>}
         </div>
     );
 }

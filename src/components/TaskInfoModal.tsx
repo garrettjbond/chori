@@ -11,7 +11,7 @@ type ModalProps = {
 }
 
 function TaskInfoModal({ children, className, ...props }: ModalProps) {
-    const [isOpen, setIsOpen] = useState<boolean>(true)
+    const [isOpen, setIsOpen] = useState<boolean>(false)
     const [isColumnCaretRotated, setIsColumnCaretRotated] = useState<boolean>(false)
 
     function toggleModalDisplay() {
@@ -46,8 +46,8 @@ function TaskInfoModal({ children, className, ...props }: ModalProps) {
                                         </div>
                                         <form action="" className='flex flex-col gap-2 pt-4'>
                                             <h3 className='font-semibold'>Description</h3>
-                                            <textarea name="" id="" placeholder='Add a more detailed description...' className='border border-gray-300 p-2 rounded-md'></textarea>
-                                            <Button className='w-15 rounded-xl flex items-center justify-center bg-nurple text-white hover:bg-lightNurple duration-300 cursor-pointer'>Save</Button>
+                                            <textarea name="" id="" placeholder='Add a more detailed description...' className='m-1 border border-gray-300 p-2 rounded-md'></textarea>
+                                            <Button className='w-15 rounded-xl flex items-center justify-center bg-nurple ml-1 text-white hover:bg-lightNurple duration-300 cursor-pointer'>Save</Button>
                                         </form>
                                     </div>
                                 </div>
@@ -56,8 +56,8 @@ function TaskInfoModal({ children, className, ...props }: ModalProps) {
                                     
                                         <div className='flex-1 min-h-0 overflow-hidden'>
                                             <form action="" className='flex flex-col gap-2 mb-4'>
-                                                <input type="text" placeholder='Write a comment...' className='border border-gray-300 p-2 rounded-full' />
-                                                <Button className='w-15 rounded-xl flex items-center justify-center bg-nurple text-white hover:bg-lightNurple duration-300 cursor-pointer'>Save</Button>
+                                                <input type="text" placeholder='Write a comment...' className='border border-gray-300 m-1 p-2 pl-3 rounded-full' />
+                                                <Button className='w-15 rounded-xl flex items-center justify-center ml-1 bg-nurple text-white hover:bg-lightNurple duration-300 cursor-pointer'>Save</Button>
                                             </form>
                                             <div className='flex flex-col gap-1 py-2 max-h-40 md:max-h-96 overflow-y-auto'>
                                                 <Comment content='added a comment to this ticket on 9-11-2025'></Comment>

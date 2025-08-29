@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <div className="fixed top-0 h-16 left-0 w-full flex justify-between p-2 border-b-5 border-lavender xl:px-70 lg:px-30 md:px-20">
+    <div className="fixed top-0 h-16 left-0 w-full flex justify-between p-2 border-b-5 border-lavender xl:px-60 lg:px-30 md:px-20">
         <div className='flex items-center justify-start'>
             <Link to="/" className='cursor-pointer hover:text-nurple duration-300'>
                 <span className="flex items-center">

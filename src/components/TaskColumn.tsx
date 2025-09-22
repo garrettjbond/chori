@@ -1,54 +1,50 @@
-import { faClose, faEllipsis, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Task from "./Task";
 import { useState } from "react";
 import CreateTask from "./CreateTask";
+import { useKanbanStore, type Column, type Task as TaskType } from '../global/kanbanStore.ts'
+import TaskColumnOptionsModal from "./TaskColumnOptionsModal.tsx";
+import { useModalStore } from "../global/modalStore.ts";
 
 type TaskColumnProps = {
-    children: React.ReactNode;
+    onTaskOpen: () => void;
+    search: string;
+    key: string;
+    title: string;
     className?: string;
-    onTaskClick?: () => void;
+    column: Column;
 }
 
-function TaskColumn({ children, className, onTaskClick, ...props }: TaskColumnProps) {
-    const [isColumnOptionsOpen, setIsColumnOptionsOpen] = useState<boolean>(false);
-
-    const toggleColumnOptions = () => {
-        setIsColumnOptionsOpen(prev => !prev)
-    }
+const TaskColumn = ({ onTaskOpen, search, key, title, className, column, ...props }: TaskColumnProps) => {
+    const {openModal, modals, closeModal} = useModalStore();
+    const { setActiveColumnId, activeColumnId} = useKanbanStore();
+    const [isRenameOpen, setIsRenameOpen] = useState<boolean>(false)
+    const filteredTasks = column.tasks.filter(task => task.title.toLowerCase().includes(search.toLowerCase()));
 
     return (
         <div className={`w-75 h-fit font-semibold rounded-md mb-5 bg-taskBackground flex flex-shrink-0 flex-col gap-2 ${className}`} {...props}>
             <div className="columnHeader bg-taskHeader border border-gray-300 rounded-md relative">
                 <div className="cursor-pointer hover:text-nurple duration-300 flex justify-between items-center px-3 rounded-md h-11">
-                    <h2>Column Title</h2>
-                    <FontAwesomeIcon onClick={toggleColumnOptions} icon={faEllipsis} className="hover:animate-pulse text-lg" />
+                    <h2>{title}</h2>
+                    <FontAwesomeIcon onClick={() => {
+                        setIsRenameOpen(false)
+                        setActiveColumnId(column.id)
+                        openModal("columnOptions");
+                    }} icon={faEllipsis} className="hover:animate-pulse text-lg" />
                 </div>
-                {
-                    isColumnOptionsOpen &&
-                    <div className="absolute top-full right-0 mt-1 bg-white border border-gray-300 rounded-md shadow-lg p-3 min-w-64 z-10">
-                        <div className="flex justify-between items-center mb-2">
-                            <div className="invisible"></div>
-                            <h3 className="font-semibold">List Actions</h3>
-                            <FontAwesomeIcon icon={faClose} onClick={toggleColumnOptions} className="cursor-pointer hover:text-darkAsh"></FontAwesomeIcon>
-                        </div>
-                        <ul className="flex flex-col gap-2">
-                            <li className="flex items-center justify-between text-gray-500 p-2 hover:bg-lavender hover:text-gray-800 rounded cursor-pointer">
-                                Rename Column <FontAwesomeIcon icon={faPenToSquare}></FontAwesomeIcon>
-                            </li>
-                            <li className="flex items-center justify-between text-gray-500 p-2 hover:bg-lavender hover:text-gray-800 rounded cursor-pointer">
-                                Delete Column <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
-                            </li>
-                        </ul>
-                    </div>
-                }
+                <TaskColumnOptionsModal isRename={isRenameOpen}
+                    setIsRename={setIsRenameOpen} colId={column.id} isOpen={modals.columnOptions && activeColumnId === column.id} onClose={() => closeModal('columnOptions')} />
             </div>
-            <Task children={undefined}></Task>
-            <Task children={undefined}></Task>
-            <Task children={undefined}></Task>
-            <CreateTask isOpen={false}></CreateTask>
+            {
+                filteredTasks
+                    .map((task: TaskType) => (
+                        <Task task={task} taskId={task.id} onOpen={onTaskOpen} key={task.id} title={task.title} columnId={column.id} />
+                    ))
+            }
+            <CreateTask colId={column.id} isOpen={modals.createTask && activeColumnId === column.id}></CreateTask>
         </div>
     );
 }
 
-export default TaskColumn
+export default TaskColumn;

@@ -1,32 +1,42 @@
 import Taskbar from '../components/Taskbar';
 import TaskColumn from '../components/TaskColumn';
 import CreateColumn from '../components/CreateColumn';
-import FooterNav from '../components/FooterNav';
+import BoardFooterNav from '../components/BoardFooterNav.tsx';
 import TaskInfoModal from '../components/TaskInfoModal';
 import BoardSwitchModal from '../components/BoardSwitchModal';
-import { useState } from 'react';
 import Navbar from '../components/Navbar';
+import { useState } from 'react';
+import { useKanbanStore } from '../global/kanbanStore.ts'
+import BoardOptionsModal from '../components/BoardOptionsModal.tsx';
+import { useModalStore } from '../global/modalStore.ts';
 
-const BoardPage: React.FC = () => {
-  const [isTaskInfoModalOpen, setIsTaskInfoModalOpen] = useState<boolean>(false);
-  const [isBoardSwitchModalOpen, setIsBoardSwitchModalOpen] = useState<boolean>(false);
 
-  const toggleTaskInfoModal = () => setIsTaskInfoModalOpen(prev => !prev);
-  const toggleBoardSwitchModal = () => setIsBoardSwitchModalOpen(prev => !prev);
+const BoardPage = () => {
+  const { getActiveBoard} = useKanbanStore();
+  const {openModal} = useModalStore();
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const activeBoard = getActiveBoard();
+  if (!activeBoard) return null;
 
 
   return (
     <div className="p-10 w-full h-full xl:px-60 lg:px-30 md:px-20">
-      <Navbar />
-      <Taskbar />
-      <div className='pageContainer mt-38 flex flex-row overflow-x-auto gap-10'>
-        <TaskColumn children={undefined}></TaskColumn>
-        <TaskColumn children={undefined}></TaskColumn>
+      <Navbar onSearchChange={setSearchTerm}  />
+      <Taskbar onOptionsModalOpen={()=>openModal("boardOptions")} />
+      <BoardOptionsModal/>
+      <div className='pageContainer mt-38 flex flex-row overflow-x-auto min-h-75 gap-10'>
+      {
+            activeBoard.columns
+              .map(column => (
+                <TaskColumn onTaskOpen={()=> openModal('taskInfo')} search={searchTerm} key={column.id} column={column} title = {column.title}/>
+              ))
+          }
         <CreateColumn ></CreateColumn>
       </div>
-      <TaskInfoModal isOpen={isTaskInfoModalOpen} children={undefined}></TaskInfoModal>
-      <BoardSwitchModal isOpen={isBoardSwitchModalOpen} children={undefined}></BoardSwitchModal>
-      <FooterNav children={undefined}></FooterNav>
+      <TaskInfoModal/>
+      <BoardSwitchModal/>
+      <BoardFooterNav onOpen = {()=> openModal("boardSwitch")} />
     </div>
   );
 };

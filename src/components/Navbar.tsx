@@ -3,8 +3,21 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { faFlipboard } from '@fortawesome/free-brands-svg-icons'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons/faCircleUser'
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
-const Navbar = () => {
+type NavbarProps = {
+    onSearchChange: (term: string) => void;
+  }
+
+
+const Navbar = ({onSearchChange}: NavbarProps) => {
+    const [inputValue, setInputValue] = useState<string>("");
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value);
+        onSearchChange(e.target.value);
+    };
+    
   return (
     <div className="fixed top-0 h-16 left-0 w-full flex justify-between p-2 border-b-5 border-lavender xl:px-60 lg:px-30 md:px-20">
         <div className='flex items-center justify-start'>
@@ -24,6 +37,8 @@ const Navbar = () => {
                     className="rounded-full border-2 text-black border-gray-300 h-10 pl-3 md:pl-10 w-full"
                     type="text"
                     placeholder="Search"
+                    onChange={handleChange}
+                    value={inputValue}
                 />
             </div>
         </form>

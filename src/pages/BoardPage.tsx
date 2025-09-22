@@ -24,27 +24,27 @@ const BoardPage = () => {
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over) return;
-  
+
     const activeId = active.id as string;
     const overId = over.id as string;
-  
+
     if (activeBoard.columns.some(col => col.id === activeId)) {
       const activeColumnIndex = activeBoard.columns.findIndex(col => col.id === activeId);
       const overColumnIndex = activeBoard.columns.findIndex(col => col.id === overId);
-      
+
       if (activeColumnIndex !== -1 && overColumnIndex !== -1 && activeColumnIndex !== overColumnIndex) {
         moveColumn(activeBoard.id, activeId, overColumnIndex);
       }
     } else {
       const draggedTaskId = activeId;
       const targetColumnId = overId.replace("-drop", "");
-      
-      const sourceColumn = activeBoard.columns.find(column => 
+
+      const sourceColumn = activeBoard.columns.find(column =>
         column.tasks?.some(task => task.id === draggedTaskId)
       );
-      
+
       if (!sourceColumn) return;
-      
+
       if (sourceColumn.id !== targetColumnId) {
         moveTask(
           activeBoard.id,
@@ -65,15 +65,15 @@ const BoardPage = () => {
       <BoardOptionsModal />
       <DndContext onDragEnd={handleDragEnd} >
         <div className='pageContainer mt-38 flex gap-10'>
-          <div className='flex flex-row overflow-x-auto min-h-75 gap-10'>
-          {
-            activeBoard.columns
-            .map(column => (
-              <TaskColumn onTaskOpen={() => openModal('taskInfo')} search={searchTerm} key={column.id} column={column} title={column.title} />
-            ))
-          }
+          <div className='flex flex-row overflow-x-auto min-h-75 gap-5'>
+            {
+              activeBoard.columns
+              .map(column => (
+                <TaskColumn onTaskOpen={() => openModal('taskInfo')} search={searchTerm} key={column.id} column={column} title={column.title} />
+              ))
+            }
+            <CreateColumn ></CreateColumn>
           </div>
-          <CreateColumn ></CreateColumn>
         </div>
       </DndContext>
       <TaskInfoModal />

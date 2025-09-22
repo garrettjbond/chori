@@ -1,9 +1,8 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import BoardPage from './pages/BoardPage';
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <Router>
       <Routes>

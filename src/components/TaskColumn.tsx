@@ -56,7 +56,7 @@ const TaskColumn = ({ onTaskOpen, search, title, className, column, ...props }: 
         <div
             ref={combinedRef}
             style={columnStyle}
-            className={`w-75 h-fit font-semibold rounded-md mb-5 bg-taskBackground flex flex-shrink-0 flex-col gap-2 ${
+            className={`w-70 h-fit font-semibold rounded-md mb-5 bg-taskBackground flex flex-shrink-0 flex-col gap-2 ${
                 isColumnOver ? 'ring-2 ring-nurple' : ''
             } ${className || ""}`}
             {...props}

@@ -34,12 +34,9 @@ const Task = ({ onOpen, task, taskId, title, columnId, className }: TaskProps) =
     return (<div ref={setNodeRef} style={style} className="relative">
         <div className={`task group flex justify-between items-center bg-white border border-gray-300 px-3 rounded-md h-11 ${className || ''}`}>
 
-            {/* Left side: drag handle */}
             <div {...listeners} {...attributes} className="mr-2 cursor-move flex items-center">
                 <FontAwesomeIcon className="text-2xl text-darkAsh" icon={faGripVertical} />
             </div>
-
-            {/* Middle: clickable area to open task modal */}
             <div
                 onClick={() => {
                     onOpen();
@@ -50,8 +47,6 @@ const Task = ({ onOpen, task, taskId, title, columnId, className }: TaskProps) =
             >
                 <p>{title}</p>
             </div>
-
-            {/* Right: ellipsis button */}
             <FontAwesomeIcon
                 icon={faEllipsis}
                 onClick={() => {
@@ -60,12 +55,9 @@ const Task = ({ onOpen, task, taskId, title, columnId, className }: TaskProps) =
                     setActiveTaskId(taskId);
                     openModal("taskOptions");
                 }}
-                className="opacity-0 group-hover:opacity-100 hover:animate-pulse text-lg transition-opacity duration-200 cursor-pointer"
+                className="text-lg cursor-pointer transition-transform duration-200 hover:scale-110 hover:text-nurple"
             />
-
         </div>
-
-        {/* Task tags */}
         <div className="absolute bottom-full flex gap-1">
             {task?.tags?.map((tag, idx) => (
                 <div key={idx} className="w-7 h-1 rounded-t-full" style={{ backgroundColor: tag.color }} />

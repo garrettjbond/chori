@@ -12,8 +12,8 @@ type BoardSwitchProps = {
 
 const BoardSwitchModal = ({ className, ...props }: BoardSwitchProps) => {
     const [inputValue, setInputValue] = useState<string>("");
-    const {boards, activeBoardId} = useKanbanStore();
-    const {closeModal, modals} = useModalStore();
+    const { boards, activeBoardId } = useKanbanStore();
+    const { closeModal, modals } = useModalStore();
     const filteredBoards = boards.filter(board => board.title.toLowerCase().includes(inputValue.toLowerCase()));
 
 
@@ -21,7 +21,7 @@ const BoardSwitchModal = ({ className, ...props }: BoardSwitchProps) => {
         setInputValue("");
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         closeModal('boardSwitch')
     }, [activeBoardId])
 
@@ -33,7 +33,7 @@ const BoardSwitchModal = ({ className, ...props }: BoardSwitchProps) => {
                         <div className={`rounded-lg bg-white w-4/5 h-4/5 xl:w-3/5 2xl:w-1/2 2xl:h-2/3 ${className}`} {...props}>
                             <div className="modalHeader flex justify-between border-lavender border-b-4 px-5 h-15 items-center font-semibold text-xl">
                                 <h2>Board Selection</h2>
-                                <Button size='custom' className='hover:text-ash duration-300' onClick={() => {closeModal('boardSwitch')}}><FontAwesomeIcon icon={faClose} /></Button>
+                                <Button size='custom' className='hover:text-ash duration-300' onClick={() => { closeModal('boardSwitch') }}><FontAwesomeIcon icon={faClose} /></Button>
                             </div>
                             <div className='px-5 pt-5 flex flex-col h-full'>
                                 <div className='inputContainer relative flex-shrink-0 sm:mx-auto sm:w-3/4'>
@@ -46,16 +46,20 @@ const BoardSwitchModal = ({ className, ...props }: BoardSwitchProps) => {
                                     />
                                     <Button size='custom' className='absolute right-3 top-1/2 transform -translate-y-1/2 hover:text-ash duration-300' onClick={clearInput}><FontAwesomeIcon icon={faClose} /></Button>
                                 </div>
-                                <div className='flex justify-center h-full'>
-                                    <div className='cardContainer flex flex-col md:grid md:grid-cols-2 md:auto-rows-max gap-4 justify-start items-center overflow-y-auto mt-5 h-3/4'>
-                                        {
-                                            filteredBoards
-                                            .filter(i => i.id != activeBoardId)
-                                            .map(i => (
-                                              <Card key={i.id} isFavorite={i.favorite} title={i.title} boardId={i.id} />
-                                            ))
-                                        }
-                                        </div>
+                                <div className='flex justify-center h-8/10'>
+                                    {
+                                        boards.length > 1 ? (
+                                            <div className='cardContainer flex flex-col md:grid md:grid-cols-2 md:auto-rows-max gap-4 justify-start items-center overflow-y-auto mt-5 h-3/4'>
+                                                {filteredBoards
+                                                    .filter(i => i.id != activeBoardId)
+                                                    .map(i => (
+                                                        <Card key={i.id} isFavorite={i.favorite} title={i.title} boardId={i.id} />
+                                                    ))}
+                                            </div>) :
+                                            (<div className='flex justify-center items-center bg-gray-100 w-4/5 sm:w-3/5 h-full my-5 rounded-lg'>
+                                                <p className='px-5'>No other boards created yet.</p>
+                                            </div>)
+                                    }
                                 </div>
                             </div>
                         </div>

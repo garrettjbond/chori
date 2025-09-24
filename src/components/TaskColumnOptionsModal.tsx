@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useKanbanStore } from '../global/kanbanStore';
 import { useState } from 'react';
 import Button from './Button';
+import Swal from 'sweetalert2';
 
 type TaskColumnOptionsModalProps = {
     isRename: boolean;
@@ -16,7 +17,7 @@ const TaskColumnOptionsModal = ({ isRename, setIsRename, colId, isOpen, onClose 
     const { deleteAllTasks, activeBoardId, activeColumnId, deleteColumn, renameColumn, getActiveColumn } = useKanbanStore();
 
     const [renameInputValue, setRenameInputValue] = useState<string>("");
-    
+
 
     const handleRenameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setRenameInputValue(e.target.value);
@@ -53,22 +54,59 @@ const TaskColumnOptionsModal = ({ isRename, setIsRename, colId, isOpen, onClose 
                             <input value={renameInputValue} onChange={handleRenameChange} type="text" placeholder='column title' className='pl-3 h-10 bg-white border border-gray-300 w-full rounded-sm' />
                             <Button type='submit' className='bg-nurple text-white hover:bg-lightNurple duration-300 cursor-pointer'>Save</Button>
                         </form>}
-                    <li onClick={() => {
-                        const confirmed = window.confirm("Are you sure you want to delete this item? This action cannot be undone.");
-                        if(confirmed){
-                            deleteAllTasks(colId);
-                        onClose();}
-                    }} className="flex items-center justify-between text-gray-500 p-2 hover:bg-lavender hover:text-gray-800 rounded cursor-pointer">
+                    <li
+                        onClick={() => {
+                            Swal.fire({
+                                title: "Are you sure?",
+                                text: "You won't be able to revert this!",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#3085d6",
+                                cancelButtonColor: "#d33",
+                                confirmButtonText: "Yes, delete it!"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    if (activeBoardId) {
+                                        deleteAllTasks(colId);
+                                        onClose();
+
+                                        Swal.fire({
+                                            title: "Deleted!",
+                                            text: "All tasks for this column have been deleted.",
+                                            icon: "success"
+                                        });
+                                    }
+                                }
+                            });
+                        }}
+
+                        className="flex items-center justify-between text-gray-500 p-2 hover:bg-lavender hover:text-gray-800 rounded cursor-pointer">
                         Delete All Tasks <FontAwesomeIcon icon={faRecycle}></FontAwesomeIcon>
                     </li>
                     <li
                         onClick={() => {
-                        const confirmed = window.confirm("Are you sure you want to delete this item? This action cannot be undone.");
+                            Swal.fire({
+                                title: "Are you sure?",
+                                text: "You won't be able to revert this!",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#3085d6",
+                                cancelButtonColor: "#d33",
+                                confirmButtonText: "Yes, delete it!"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    if (activeBoardId) {
+                                        onClose();
+                                        deleteColumn(activeBoardId, colId);
 
-                            if (activeBoardId && confirmed) {
-                                onClose();
-                                deleteColumn(activeBoardId, colId);
-                            }
+                                        Swal.fire({
+                                            title: "Deleted!",
+                                            text: "Your column has been deleted.",
+                                            icon: "success"
+                                        });
+                                    }
+                                }
+                            });
                         }}
                         className="flex items-center justify-between text-gray-500 p-2 hover:bg-lavender hover:text-gray-800 rounded cursor-pointer"
                     >

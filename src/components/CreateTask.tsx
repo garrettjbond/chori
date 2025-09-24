@@ -35,7 +35,7 @@ const CreateTask = ({ isOpen, colId, className, ...props }: CreateTaskProps) => 
     }
 
     return (
-        <div className={`w-71 font-semibold rounded-md flex flex-shrink-0 flex-col gap-2 ${className}`} {...props}>
+        <div className={`w-65 font-semibold rounded-md flex flex-shrink-0 flex-col gap-2 ${className}`} {...props}>
 
             {isOpen ? (
                 <form
@@ -67,7 +67,7 @@ const CreateTask = ({ isOpen, colId, className, ...props }: CreateTaskProps) => 
                         </Button>
                     </div>
                 </form>
-            ) : <Button onClick={() => openDisplay(colId)} className="TaskHeader cursor-pointer w-71 flex flex-shrink-0 font-semibold hover:text-nurple duration-300 bg-taskBackground px-3 pb-4 rounded-md h-11 justify-start items-center"><span className='font-bold text-xl pr-2'>+</span>Create New Task</Button>}
+            ) : <Button onClick={() => openDisplay(colId)} className="TaskHeader cursor-pointer w-65 flex flex-shrink-0 font-semibold hover:text-nurple duration-300 bg-taskBackground px-3 pb-4 rounded-md h-11 justify-start items-center"><span className='font-bold text-xl pr-2'>+</span>Create New Task</Button>}
         </div>
     );
 }

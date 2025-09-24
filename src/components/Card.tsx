@@ -22,7 +22,7 @@ const Card = ({ className, ...props }: CardProps) => {
           <h3 className="font-semibold">{props.title}</h3>
         </div>
         <div>
-          {props.isFavorite ? <FontAwesomeIcon icon={faStar} className="text-xl text-nurple" /> : <FontAwesomeIcon icon={faStar} className="text-xl text-darkAsh opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+          {props.isFavorite ? <FontAwesomeIcon icon={faStar} className="text-xl text-nurple" /> : <FontAwesomeIcon icon={faStar} className="text-xl text-darkAsh group-hover:animate-bounce duration-200" />
           }
         </div>
       </div>

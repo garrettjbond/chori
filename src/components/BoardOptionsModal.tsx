@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useKanbanStore, type Board } from '../global/kanbanStore';
 import { useModalStore } from '../global/modalStore';
+import Swal from 'sweetalert2';
 
 type BoardOptionsModalProps = {
     className?: string;
@@ -14,7 +15,7 @@ const BoardOptionsModal = ({ className, ...props }: BoardOptionsModalProps) => {
     const [isRenameOpen, setIsRenameOpen] = useState<boolean>(false)
     const [isSharingOpen, setIsSharingOpen] = useState<boolean>(false)
     const { toggleFavoriteBoard, activeBoardId, boards, getActiveBoard, deleteBoard, renameBoard } = useKanbanStore();
-    const {closeModal, modals} = useModalStore();
+    const { closeModal, modals } = useModalStore();
     const [renameInputValue, setRenameInputValue] = useState<string>("");
 
     const handleRenameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,12 +77,28 @@ const BoardOptionsModal = ({ className, ...props }: BoardOptionsModalProps) => {
                                     <Link
                                         to="/"
                                         onClick={() => {
-                                            const confirmed = window.confirm("Are you sure you want to delete this item? This action cannot be undone.");
+                                            Swal.fire({
+                                                title: "Are you sure?",
+                                                text: "You won't be able to revert this!",
+                                                icon: "warning",
+                                                showCancelButton: true,
+                                                confirmButtonColor: "#3085d6",
+                                                cancelButtonColor: "#d33",
+                                                confirmButtonText: "Yes, delete it!"
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    if (activeBoardId) {
+                                                        closeModal('boardOptions');
+                                                        deleteBoard(activeBoardId);
 
-                                            if (activeBoardId && confirmed) {
-                                                closeModal('boardOptions');
-                                                deleteBoard(activeBoardId);
-                                            }
+                                                        Swal.fire({
+                                                            title: "Deleted!",
+                                                            text: "Your board has been deleted.",
+                                                            icon: "success"
+                                                        });
+                                                    }
+                                                }
+                                            });
                                         }}
                                         className="flex items-center justify-between text-gray-500 p-2 hover:bg-lavender hover:text-gray-800 rounded cursor-pointer"
                                     >
@@ -99,14 +116,18 @@ const BoardOptionsModal = ({ className, ...props }: BoardOptionsModalProps) => {
                                     {isSharingOpen &&
                                         <form className='flex mx-1 gap-5 sm:px-5'>
                                             <input required type="text" placeholder='email' className='pl-3 h-10 bg-white border border-gray-300 w-full rounded-sm' />
-                                            <Button onClick={() => {
-                                            const confirmed = window.confirm("This functionality has not been implemented yet.");
+                                            <Button
+                                                onClick={() => {
+                                                    const confirmed = window.confirm("This functionality has not been implemented yet.");
 
-                                            if (activeBoardId && confirmed) {
-                                                closeModal('boardOptions');
-                                                setIsSharingOpen(false)
-                                            }
-                                        }}  type='button' className='bg-nurple text-white hover:bg-lightNurple duration-300 cursor-pointer'>Send</Button>
+                                                    if (activeBoardId && confirmed) {
+                                                        closeModal('boardOptions');
+                                                        setIsSharingOpen(false)
+                                                    }
+                                                }}
+
+
+                                                type='button' className='bg-nurple text-white hover:bg-lightNurple duration-300 cursor-pointer'>Send</Button>
                                         </form>}
                                     <li className="flex items-center justify-between text-gray-500 p-2 hover:bg-lavender hover:text-gray-800 rounded cursor-pointer">
                                         Members <FontAwesomeIcon icon={faPeopleGroup}></FontAwesomeIcon>

@@ -58,8 +58,6 @@ const TaskInfoModal = ({ className, ...props }: TaskInfoModalProps) => {
         setIsDescriptionEditable(false);
     }
 
-
-
     const handleTagSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (textTagInput.trim() && typeof activeTaskId === "string") {
@@ -84,7 +82,7 @@ const TaskInfoModal = ({ className, ...props }: TaskInfoModalProps) => {
                                 <p className='xs:bg-red-200 text-sm bg-lavender rounded-lg p-1 cursor-pointer flex-shrink-0' onClick={toggleColumnCaret}>{activeColumn?.title}<span><FontAwesomeIcon className={`transition-transform duration-300 ${isColumnCaretRotated ? 'rotate-90' : ''}`} icon={faCaretRight} /></span></p>
                                 <div className='relative'>
                                     {isColumnCaretRotated && (
-                                        <div className="absolute top-full right-4 mt-4 bg-white border border-gray-300 rounded-md shadow-lg p-3 min-w-64 z-10">
+                                        <div className="absolute top-full -right-18 mt-4 bg-white border border-gray-300 rounded-md shadow-lg p-3 min-w-50 z-10">
                                             <ul className="flex flex-col gap-2">
                                                 {
                                                     activeBoard?.columns
@@ -110,7 +108,7 @@ const TaskInfoModal = ({ className, ...props }: TaskInfoModalProps) => {
                                                                             closeModal('taskInfo');
                                                                         }
                                                                         }
-                                                                        className="flex items-center justify-between text-gray-500 p-2 hover:bg-lavender hover:text-gray-800 rounded cursor-pointer"
+                                                                        className="flex items-center justify-center text-gray-500 p-2 hover:bg-lavender hover:text-gray-800 rounded cursor-pointer"
                                                                     >
                                                                         {col.title}
                                                                     </li>
@@ -126,8 +124,10 @@ const TaskInfoModal = ({ className, ...props }: TaskInfoModalProps) => {
                                 <div className='flex-1'></div>
                                 <Button size='custom' className='hover:text-ash duration-300 flex-shrink-0' onClick={() => { setIsDescriptionEditable(false); closeModal('taskInfo'); setIsColumnCaretRotated(false); setIsNewTag(false) }}><FontAwesomeIcon icon={faClose} /></Button>
                             </div>
-                            <div className='xs:md:grid-rows-auto md:grid md:grid-cols-[3fr_2fr] h-full overflow-hidden'>
-                                <div className='taskDetailsContainer border-b-1 md:border-r-2 border-lavender px-7 py-3 md:py-5 overflow-hidden'>
+                            {/* grid wrapper */}
+                            <div className='xs:md:grid-rows-auto md:grid md:grid-cols-[3fr_2fr] h-full md:overflow-hidden'>
+                                {/* task details */}
+                                <div className='taskDetailsContainer border-b-1 md:border-r-2 border-lavender px-7 py-3 md:py-5 overflow-visible md:overflow-hidden'>
                                     <h3 className='flex justify-between font-semibold pb-1 cursor-pointer'>Task Details</h3>
                                     <div className='relative'>
                                         <div className='tagContainers relative flex flex-wrap gap-2 items-center'>
@@ -138,7 +138,7 @@ const TaskInfoModal = ({ className, ...props }: TaskInfoModalProps) => {
                                                 <FontAwesomeIcon icon={faPlus} />
                                             </Button>
                                             {isNewTag && (
-                                                <div className="absolute top-full left-0 mt-1 bg-white border border-gray-300 rounded-md shadow-lg p-3 min-w-64 z-50 max-w-sm">
+                                                <div className="absolute top-full left-0 mt-1 bg-white border border-gray-300 rounded-md shadow-lg p-3 min-w-64 max-w-sm z-[60]">
                                                     <div className='flex justify-between items-center mb-3'>
                                                         <div></div>
                                                         <h3 className='text-center font-semibold'>Tag Creation</h3>
@@ -180,7 +180,8 @@ const TaskInfoModal = ({ className, ...props }: TaskInfoModalProps) => {
                                                 <div className="m-1">
                                                     {activeTask?.description && activeTask.description.trim() !== "" ? (
                                                         <>
-                                                            <p className="p-2 border border-gray-100 rounded-md bg-gray-50">
+                                                            <p className="p-2 border border-gray-100 rounded-md bg-gray-50 
+               max-h-40 overflow-y-auto">
                                                                 {activeTask.description}
                                                             </p>
                                                             <Button
@@ -213,13 +214,12 @@ const TaskInfoModal = ({ className, ...props }: TaskInfoModalProps) => {
                                                     )}
                                                 </div>
                                             )}
-
                                         </div>
                                     </div>
                                 </div>
-                                <div className='commentsContainer flex flex-col gap-2 md:border-l-2 border-lavender px-7 pt-3 md:pt-5 min-h-0 overflow-hidden'>
+                                {/* comments */}
+                                <div className='commentsContainer flex flex-col gap-2 md:border-l-2 border-lavender px-7 pt-3 md:pt-5 min-h-0 md:overflow-hidden'>
                                     <h3 className='flex justify-between font-semibold cursor-pointer'>Comments and Activity</h3>
-
                                     <div className='flex-1 min-h-0 overflow-hidden'>
                                         <form onSubmit={handleCommentSubmit} action="" className='flex flex-col gap-2 mb-4'>
                                             <input required onChange={handleCommentChange} value={textCommentInput} type="text" placeholder='Write a comment...' className='border border-gray-300 m-1 p-2 pl-3 rounded-full' />

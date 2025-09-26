@@ -13,10 +13,11 @@ type TaskProps = {
     title: string;
     taskId: string;
     columnId: string;
+    index: number;
     className?: string;
 };
 
-const Task = ({ onOpen, task, taskId, title, columnId, className }: TaskProps) => {
+const Task = ({ onOpen, index, task, taskId, title, columnId, className }: TaskProps) => {
     const { setActiveTaskId, setActiveColumnId, activeTaskId } = useKanbanStore();
     const { modals, closeModal, openModal } = useModalStore();
     const [isRenameOpen, setIsRenameOpen] = useState<boolean>(false);
@@ -58,7 +59,7 @@ const Task = ({ onOpen, task, taskId, title, columnId, className }: TaskProps) =
                 className="text-lg cursor-pointer transition-transform duration-200 hover:scale-110 hover:text-nurple"
             />
         </div>
-        <div className="absolute bottom-full flex gap-1">
+        <div className="absolute bottom-full flex gap-1 left-2">
             {task?.tags?.map((tag, idx) => (
                 <div key={idx} className="w-7 h-1 rounded-t-full" style={{ backgroundColor: tag.color }} />
             ))}
@@ -68,6 +69,7 @@ const Task = ({ onOpen, task, taskId, title, columnId, className }: TaskProps) =
             isRename={isRenameOpen}
             setIsRename={setIsRenameOpen}
             columnId={columnId}
+            index={index}
             taskId={taskId}
             isOpen={modals.taskOptions && activeTaskId === taskId}
             onClose={() => closeModal("taskOptions")}

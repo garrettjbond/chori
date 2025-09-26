@@ -10,12 +10,13 @@ type TaskOptionsModalProps = {
     isRename: boolean;
     setIsRename: React.Dispatch<React.SetStateAction<boolean>>;
     taskId: string;
+    index: number;
     columnId: string;
     onClose: () => void;
     className?: string;
 };
 
-const TaskOptionsModal = ({ isRename, setIsRename, taskId, columnId, isOpen, onClose, className }: TaskOptionsModalProps) => {
+const TaskOptionsModal = ({ isRename, index, setIsRename, taskId, columnId, isOpen, onClose, className }: TaskOptionsModalProps) => {
     const { activeTaskId, activeBoardId, deleteTask, activeColumnId, renameTask, getActiveTask } = useKanbanStore();
     const [renameInputValue, setRenameInputValue] = useState<string>("");
 
@@ -47,7 +48,7 @@ const TaskOptionsModal = ({ isRename, setIsRename, taskId, columnId, isOpen, onC
     return (<div>
         {
             isOpen &&
-            <div className="absolute top-full right-0 mt-1 bg-white border border-gray-300 rounded-md shadow-lg p-3 min-w-64 z-10">
+            <div className={`absolute ${index > 1 ? "bottom-full mb-1" : "top-full mt-1"} right-0 bg-white border border-gray-300 rounded-md shadow-lg p-3 min-w-64 z-10`}>
                 <div className="flex justify-between items-center mb-2">
                     <div className="invisible"></div>
                     <h3 className="font-semibold">Task Actions</h3>

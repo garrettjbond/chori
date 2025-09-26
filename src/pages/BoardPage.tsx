@@ -65,7 +65,7 @@ const BoardPage = () => {
       <BoardOptionsModal />
       <DndContext onDragEnd={handleDragEnd} >
         <div className='pageContainer mt-38 flex gap-10'>
-          <div className='flex flex-row overflow-x-auto min-h-75 gap-5'>
+          <div className='flex flex-row overflow-x-auto min-h-95 gap-5'>
             {
               activeBoard.columns
               .map(column => (

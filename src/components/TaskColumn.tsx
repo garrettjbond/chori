@@ -26,22 +26,18 @@ const TaskColumn = ({ onTaskOpen, search, title, className, column, ...props }: 
         task.title.toLowerCase().includes(search.toLowerCase())
     );
 
-    // Draggable for moving the column
     const { setNodeRef: setDraggableRef, listeners, attributes, transform, isDragging } = useDraggable({
         id: column.id,
     });
 
-    // Droppable for other columns to be dropped onto this position
     const { setNodeRef: setColumnDroppableRef, isOver: isColumnOver } = useDroppable({
-        id: column.id, // This will be the drop target for other columns
+        id: column.id, 
     });
 
-    // Droppable for tasks to be dropped into this column
     const { setNodeRef: setTaskDroppableRef, isOver: isTaskOver } = useDroppable({
         id: column.id + "-drop",
     });
 
-    // Combine the draggable and column droppable refs
     const combinedRef = (node: HTMLDivElement | null) => {
         setDraggableRef(node);
         setColumnDroppableRef(node);
@@ -95,12 +91,13 @@ const TaskColumn = ({ onTaskOpen, search, title, className, column, ...props }: 
                     isTaskOver && "bg-lavender"
                 }`}
             >
-                {filteredTasks.map((task: TaskType) => (
+                {filteredTasks.map((task: TaskType, idx) => (
                     <Task
                         key={task.id}
                         task={task}
                         taskId={task.id}
                         columnId={column.id}
+                        index={idx}
                         title={task.title}
                         onOpen={onTaskOpen}
                     />

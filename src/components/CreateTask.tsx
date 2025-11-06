@@ -20,7 +20,7 @@ const CreateTask = ({ isOpen, colId, className, ...props }: CreateTaskProps) => 
         setTextInput(e.target.value)
     }
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>, colId: string) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (activeColumnId) {
             createTask(activeColumnId, textInput.trim());
@@ -39,7 +39,7 @@ const CreateTask = ({ isOpen, colId, className, ...props }: CreateTaskProps) => 
 
             {isOpen ? (
                 <form
-                    onSubmit={(e) => handleSubmit(e, colId)}
+                    onSubmit={(e) => handleSubmit(e)}
                     className="rounded-md bg-taskBackground flex flex-col px-4 py-5"
                 >
                     <input

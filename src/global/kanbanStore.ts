@@ -272,7 +272,6 @@ export const useKanbanStore = create<KanbanState>()(
       activeCommentId: null,
       setActiveCommentId: (commentId: string | null) => set({ activeCommentId: commentId }),
       getActiveComment: () => {
-        const column = get().getActiveColumn();
         const task = get().getActiveTask();
         if (!task) return null;
         return task.comments?.find((c) => c.id === get().activeCommentId) || null;

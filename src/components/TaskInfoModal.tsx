@@ -15,7 +15,7 @@ const TaskInfoModal = ({ className, ...props }: TaskInfoModalProps) => {
     const [isColumnCaretRotated, setIsColumnCaretRotated] = useState<boolean>(false);
     const [isNewTag, setIsNewTag] = useState<boolean>(false);
     const [isDescriptionEditable, setIsDescriptionEditable] = useState<boolean>(false);
-    const { getActiveTask, activeTaskId, createComment, getActiveBoard, getActiveColumn, moveTask, getActiveTag, createTag, updateTask } = useKanbanStore();
+    const { getActiveTask, activeTaskId, createComment, getActiveBoard, getActiveColumn, moveTask, createTag, updateTask } = useKanbanStore();
     const { modals, closeModal } = useModalStore();
     const activeTask = getActiveTask();
     const [newDescription, setNewDescription] = useState<string>(activeTask?.description ?? "");

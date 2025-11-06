@@ -16,7 +16,7 @@ type TaskOptionsModalProps = {
     className?: string;
 };
 
-const TaskOptionsModal = ({ isRename, index, setIsRename, taskId, columnId, isOpen, onClose, className }: TaskOptionsModalProps) => {
+const TaskOptionsModal = ({ isRename, index, setIsRename, taskId, columnId, isOpen, onClose}: TaskOptionsModalProps) => {
     const { activeTaskId, activeBoardId, deleteTask, activeColumnId, renameTask, getActiveTask } = useKanbanStore();
     const [renameInputValue, setRenameInputValue] = useState<string>("");
 

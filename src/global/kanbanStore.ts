@@ -84,26 +84,47 @@ export type KanbanState = {
   deleteTag: (tagId: string, taskId: string) => void;
 };
 
+const createInitialState = () => {
+  const initialBoardId = crypto.randomUUID();
+  return {
+    initialBoardId,
+    initialBoards: [
+      {
+        id: initialBoardId,
+        title: 'My First Board',
+        favorite: false,
+        columns: [
+          { id: crypto.randomUUID(), title: 'Backlog', tasks: [] },
+          { id: crypto.randomUUID(), title: 'Doing', tasks: [] },
+          { id: crypto.randomUUID(), title: 'Done', tasks: [] },
+        ],
+      },
+    ],
+  };
+};
+
 export const useKanbanStore = create<KanbanState>()(
   persist(
-    (set, get) => ({
-      // --- Boards ---
-      activeBoardId: null,
-      setActiveBoardId: (boardId: string | null) => {
-        if (!boardId) {
-          set({ activeBoardId: null, activeColumnId: null, activeTaskId: null });
-          return;
-        }
-        const state = get();
-        if (state.boards.some((b) => b.id === boardId)) {
-          set({ activeBoardId: boardId, activeColumnId: null, activeTaskId: null });
-        }
-      },
-      getActiveBoard: () => {
-        const state = get();
-        return state.boards.find((b) => b.id === state.activeBoardId) || null;
-      },
-      boards: [],
+    (set, get) => {
+      const { initialBoardId, initialBoards } = createInitialState();
+      return {
+        // --- Boards ---
+        activeBoardId: initialBoardId,
+        setActiveBoardId: (boardId: string | null) => {
+          if (!boardId) {
+            set({ activeBoardId: null, activeColumnId: null, activeTaskId: null });
+            return;
+          }
+          const state = get();
+          if (state.boards.some((b) => b.id === boardId)) {
+            set({ activeBoardId: boardId, activeColumnId: null, activeTaskId: null });
+          }
+        },
+        getActiveBoard: () => {
+          const state = get();
+          return state.boards.find((b) => b.id === state.activeBoardId) || null;
+        },
+        boards: initialBoards,
       createBoard: (title: string) =>
         set((state) => {
           const newBoard: Board = { id: crypto.randomUUID(), title, favorite: false, columns: [] };
@@ -352,7 +373,8 @@ export const useKanbanStore = create<KanbanState>()(
             })),
           })),
         })),
-    }),
+      };
+    },
     {
       name: 'kanban-storage',
       partialize: (state) => ({

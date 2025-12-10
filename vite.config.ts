@@ -5,5 +5,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   base: '/chori/',
+  build:{
+    outDir: 'docs'
+  },
   plugins: [react(), tailwindcss()],
 });

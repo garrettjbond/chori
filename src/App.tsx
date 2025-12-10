@@ -4,7 +4,7 @@ import BoardPage from './pages/BoardPage';
 
 const App = () => {
   return (
-    <Router>
+    <Router basename='/chori'>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/board/:boardId" element={<BoardPage />} />

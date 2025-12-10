@@ -43,6 +43,7 @@ export type KanbanState = {
   setActiveBoardId: (boardId: string | null) => void;
   getActiveBoard: () => Board | null;
   boards: Board[];
+  initializeDefaultBoard: () => void;
   createBoard: (title: string) => void;
   renameBoard: (boardId: string, newTitle: string) => void;
   toggleFavoriteBoard: (boardId: string) => void;
@@ -125,7 +126,14 @@ export const useKanbanStore = create<KanbanState>()(
           return state.boards.find((b) => b.id === state.activeBoardId) || null;
         },
         boards: initialBoards,
-      createBoard: (title: string) =>
+        initializeDefaultBoard: () => {
+          const state = get();
+          if (state.boards.length === 0) {
+            const { initialBoardId, initialBoards } = createInitialState();
+            set({ boards: initialBoards, activeBoardId: initialBoardId });
+          }
+        },
+        createBoard: (title: string) =>
         set((state) => {
           const newBoard: Board = { id: crypto.randomUUID(), title, favorite: false, columns: [] };
           return { boards: [...state.boards, newBoard], activeBoardId: newBoard.id };
@@ -383,23 +391,18 @@ export const useKanbanStore = create<KanbanState>()(
         activeColumnId: state.activeColumnId,
         activeTaskId: state.activeTaskId,
       }),
-      merge: (persistedState, currentState) => {
-        const persisted = persistedState as any;
-        // If persisted state has no boards or empty boards, use initial state
-        if (!persisted?.boards || persisted.boards.length === 0) {
-          const { initialBoardId, initialBoards } = createInitialState();
-          return {
-            ...currentState,
-            ...persisted,
-            boards: initialBoards,
-            activeBoardId: persisted?.activeBoardId || initialBoardId,
-          };
+      onRehydrateStorage: () => (state, error) => {
+        if (error) {
+          console.error('Error rehydrating kanban store:', error);
+          return;
         }
-        // Otherwise merge normally
-        return {
-          ...currentState,
-          ...persisted,
-        };
+        if (state && (!state.boards || state.boards.length === 0)) {
+          const { initialBoardId, initialBoards } = createInitialState();
+          state.boards = initialBoards;
+          if (!state.activeBoardId) {
+            state.activeBoardId = initialBoardId;
+          }
+        }
       },
     }
   )

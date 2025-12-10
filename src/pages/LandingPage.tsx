@@ -4,12 +4,17 @@ import Card from '../components/Card';
 import SideNav from '../components/SideNav';
 import CreateBoardModal from '../components/CreateBoardModal';
 import BoardOptionsModal from '../components/BoardOptionsModal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useKanbanStore } from '../global/kanbanStore.ts'
 import { useModalStore } from '../global/modalStore.ts';
 
 const LandingPage = () => {
-  const { boards } = useKanbanStore();
+  const { boards, initializeDefaultBoard } = useKanbanStore();
+  
+  useEffect(() => {
+    initializeDefaultBoard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const { openModal } = useModalStore();
   const [searchTerm, setSearchTerm] = useState<string>("");
   const filteredBoards = boards.filter(board => board.title.toLowerCase().includes(searchTerm.toLowerCase()));

@@ -383,6 +383,24 @@ export const useKanbanStore = create<KanbanState>()(
         activeColumnId: state.activeColumnId,
         activeTaskId: state.activeTaskId,
       }),
+      merge: (persistedState, currentState) => {
+        const persisted = persistedState as any;
+        // If persisted state has no boards or empty boards, use initial state
+        if (!persisted?.boards || persisted.boards.length === 0) {
+          const { initialBoardId, initialBoards } = createInitialState();
+          return {
+            ...currentState,
+            ...persisted,
+            boards: initialBoards,
+            activeBoardId: persisted?.activeBoardId || initialBoardId,
+          };
+        }
+        // Otherwise merge normally
+        return {
+          ...currentState,
+          ...persisted,
+        };
+      },
     }
   )
 );

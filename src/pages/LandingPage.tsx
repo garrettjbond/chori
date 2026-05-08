@@ -10,7 +10,7 @@ import { useModalStore } from '../global/modalStore.ts';
 
 const LandingPage = () => {
   const { boards, initializeDefaultBoard } = useKanbanStore();
-  
+
   useEffect(() => {
     initializeDefaultBoard();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -21,47 +21,55 @@ const LandingPage = () => {
 
 
   return (
-    <div className="p-10 w-full">
+    <main className="p-10 w-full">
       <Navbar onSearchChange={setSearchTerm} />
       <CreateBoardModal />
       <BoardOptionsModal />
       <div className='pageContainer mt-24 gap-10 xl:flex xl:mx-70 lg:mx-30 md:mx-20'>
-        <SideNav boards={filteredBoards} />
+        <aside aria-label='Board navigation'>
+          <SideNav boards={filteredBoards} />
+        </aside>
         <div className='xl:w-4/5'>
           {
             filteredBoards.filter(i => i.favorite).length > 0 && (
-              <div>
+              <section aria-labelledby="favorites-heading">
                 <div className='landingHeaderContainer flex justify-between items-end'>
-                  <h2 className="text-lg lg:text-xl font-bold pl-6">FAVORITES</h2>
+                  <h2 id="favorites-heading" className="text-lg lg:text-xl font-bold pl-6 uppercase">Favorites</h2>
                 </div>
-                <div className='favoritesCardContainer mt-5 flex gap-4 overflow-x-auto p-2'>
+                <ul className='favoritesCardContainer mt-5 flex gap-4 overflow-x-auto p-2'>
                   {
                     filteredBoards
                       .filter(i => i.favorite)
                       .map(i => (
-                        <Card key={i.id} isFavorite={i.favorite} title={i.title} boardId={i.id} />
+                        <li key={i.id}>
+                          <Card isFavorite={i.favorite} title={i.title} boardId={i.id} />
+                        </li>
                       ))
                   }
-                </div>
-              </div>
+                </ul>
+              </section>
             )
           }
-          <div className='landingHeaderContainer flex justify-between items-end pt-8'>
-            <h2 className="text-lg lg:text-xl font-bold pl-6">YOUR BOARDS</h2>
-            <Button className="bg-nurple text-white hover:bg-lightNurple duration-300" onClick={() => openModal('createBoard')}>Create</Button>
-          </div>
-          <div className="cardContainer mt-5 flex gap-4 overflow-x-auto p-2">
-            {
-              filteredBoards
-                .filter(i => !i.favorite)
-                .map(i => (
-                  <Card key={i.id} isFavorite={i.favorite} title={i.title} boardId={i.id} />
-                ))
-            }
-          </div>
+          <section aria-labelledby="boards-heading">
+            <div className='landingHeaderContainer flex justify-between items-end pt-8'>
+              <h2 id="boards-heading" className="text-lg lg:text-xl font-bold pl-6 uppercase">Your Boards</h2>
+              <Button className="bg-nurple text-white hover:bg-lightNurple duration-300" onClick={() => openModal('createBoard')}>Create</Button>
+            </div>
+            <ul className="cardContainer mt-5 flex gap-4 overflow-x-auto p-2">
+              {
+                filteredBoards
+                  .filter(i => !i.favorite)
+                  .map(i => (
+                    <li key={i.id}>
+                      <Card isFavorite={i.favorite} title={i.title} boardId={i.id} />
+                    </li>
+                  ))
+              }
+            </ul>
+          </section>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

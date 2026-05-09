@@ -1,7 +1,6 @@
 import { faClose, faPenToSquare, faPeopleGroup, faStar, faTrash, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from './Button';
-import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useKanbanStore, type Board } from '../global/kanbanStore';
 import { useModalStore } from '../global/modalStore';

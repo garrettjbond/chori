@@ -7,11 +7,10 @@ type SideNavProps = {
     boards: Board[];
 }
 
-
 const SideNav = ({boards}:SideNavProps ) => {
     return (
         <div className='sideNavContainer hidden xl:block xl:min-w-48 xl:w-1/5 xl:flex xl:flex-col xl:gap-5'>
-            <p className='sideNavLink cursor-pointer hover:text-nurple duration-300 lg:text-2xl'> <span className='pr-2'><FontAwesomeIcon icon={faWindowMaximize} /></span>Boards</p>
+            <h2 className='sideNavLink cursor-pointer hover:text-nurple duration-300 lg:text-2xl'> <span className='pr-2'><FontAwesomeIcon icon={faWindowMaximize} /></span>Boards</h2>
             <hr className="text-ash" />
             {
                 boards

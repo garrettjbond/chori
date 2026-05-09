@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <style>
+    path { fill: #000; }
+    @media (prefers-color-scheme: dark) {
+      path { fill: #fff; }
+    }
+  </style>
+  <!-- Font Awesome Free - fa-flipboard (brands) -->
+  <path d="M0 32v448h448V32H0zm358.4 180.1H269v89.9h-89.9v89.4H89.6V121.6h268.8v90.5z"/>
+</svg>

@@ -10,15 +10,12 @@ import { useModalStore } from '../global/modalStore.ts';
 
 const LandingPage = () => {
   const { boards, initializeDefaultBoard } = useKanbanStore();
-
-  useEffect(() => {
-    initializeDefaultBoard();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   const { openModal } = useModalStore();
   const [searchTerm, setSearchTerm] = useState<string>("");
   const filteredBoards = boards.filter(board => board.title.toLowerCase().includes(searchTerm.toLowerCase()));
-
+  useEffect(() => {
+    initializeDefaultBoard();
+  }, []);
 
   return (
     <main className="p-10 w-full">

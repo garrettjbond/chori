@@ -1,7 +1,7 @@
 import { faClose, faPenToSquare, faPeopleGroup, faStar, faTrash, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from './Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useKanbanStore, type Board } from '../global/kanbanStore';
 import { useModalStore } from '../global/modalStore';
@@ -44,6 +44,7 @@ const BoardOptionsModal = ({ className, ...props }: BoardOptionsModalProps) => {
                             <div className="modalHeader flex justify-between border-lavender border-b-4 px-5 h-15 items-center font-semibold text-xl">
                                 <h2>Board Options</h2>
                                 <Button
+                                    aria-label='Close Board Options modal'
                                     size='custom'
                                     className='hover:text-ash duration-300'
                                     onClick={() => {
@@ -52,7 +53,7 @@ const BoardOptionsModal = ({ className, ...props }: BoardOptionsModalProps) => {
                                         closeModal("boardOptions");
                                     }}
                                 >
-                                    <FontAwesomeIcon icon={faClose} />
+                                    <FontAwesomeIcon icon={faClose} aria-hidden="true" />
                                 </Button>
                             </div>
                             <div className='px-5 sm:px-10 md:px-20 py-5 h-full w-full flex flex-col '>
@@ -68,14 +69,16 @@ const BoardOptionsModal = ({ className, ...props }: BoardOptionsModalProps) => {
                                     </li>
                                     {isRenameOpen &&
                                         <form onSubmit={handleSubmit} className='flex mx-1 gap-5 sm:px-5'>
-                                            <input required maxLength={15} value={renameInputValue} onChange={handleRenameChange} type="text" placeholder={activeBoard.title} className='pl-3 h-10 bg-white border border-gray-300 w-full rounded-sm' />
+                                            <label htmlFor="rename-board-input" className="sr-only">
+                                                New board name
+                                            </label>
+                                            <input id='rename-board-input' required maxLength={15} value={renameInputValue} onChange={handleRenameChange} type="text" placeholder={activeBoard.title} className='pl-3 h-10 bg-white border border-gray-300 w-full rounded-sm' />
                                             <Button type='submit' className='bg-nurple text-white hover:bg-lightNurple duration-300 cursor-pointer'>Save</Button>
                                         </form>}
                                     <li onClick={() => activeBoardId && toggleFavoriteBoard(activeBoardId)} className="flex items-center justify-between text-gray-500 p-2 hover:bg-lavender hover:text-gray-800 rounded cursor-pointer">
                                         Favorite Board <FontAwesomeIcon className={`${boards.find((board: Board) => board.id === activeBoardId)?.favorite ? 'text-nurple hover:text-lavender' : 'text-darkAsh hover:text-lavender'}`} icon={faStar}></FontAwesomeIcon>
                                     </li>
-                                    <Link
-                                        to="/"
+                                    <button
                                         onClick={() => {
                                             Swal.fire({
                                                 title: "Are you sure?",
@@ -103,7 +106,7 @@ const BoardOptionsModal = ({ className, ...props }: BoardOptionsModalProps) => {
                                         className="flex items-center justify-between text-gray-500 p-2 hover:bg-lavender hover:text-gray-800 rounded cursor-pointer"
                                     >
                                         Delete Board <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
-                                    </Link>
+                                    </button>
                                     <li
                                         onClick={() => {
                                             setIsRenameOpen(false);
@@ -115,7 +118,10 @@ const BoardOptionsModal = ({ className, ...props }: BoardOptionsModalProps) => {
                                     </li>
                                     {isSharingOpen &&
                                         <form className='flex mx-1 gap-5 sm:px-5'>
-                                            <input required type="text" placeholder='email' className='pl-3 h-10 bg-white border border-gray-300 w-full rounded-sm' />
+                                            <label htmlFor="share-board-email" className="sr-only">
+                                                Email address to share with
+                                            </label>
+                                            <input id='share-board-email' required type="text" placeholder='email' className='pl-3 h-10 bg-white border border-gray-300 w-full rounded-sm' />
                                             <Button
                                                 onClick={() => {
                                                     const confirmed = window.confirm("This functionality has not been implemented yet.");

@@ -7,16 +7,16 @@ type SideNavProps = {
     boards: Board[];
 }
 
-const SideNav = ({boards}:SideNavProps ) => {
+const SideNav = ({ boards }: SideNavProps) => {
     return (
         <div className='sideNavContainer hidden xl:block xl:min-w-48 xl:w-1/5 xl:flex xl:flex-col xl:gap-5'>
             <h2 className='sideNavLink cursor-pointer hover:text-nurple duration-300 lg:text-2xl'> <span className='pr-2'><FontAwesomeIcon icon={faWindowMaximize} /></span>Boards</h2>
             <hr className="text-ash" />
             {
                 boards
-                .map(i => (
-                    <SideNavItem itemId = {i.id}>{i.title}</SideNavItem>
-                ))
+                    .map(i => (
+                        <SideNavItem key={i.id} itemId={i.id}>{i.title}</SideNavItem>
+                    ))
             }
         </div>
     );

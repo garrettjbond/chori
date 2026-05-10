@@ -1,6 +1,6 @@
 import { faCaretRight, faClose, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from './Button';
 import Comment from './Comment';
 import { useKanbanStore } from '../global/kanbanStore';
@@ -24,14 +24,10 @@ const TaskInfoModal = ({ className, ...props }: TaskInfoModalProps) => {
     const [textCommentInput, setTextCommentInput] = useState<string>("");
     const [textTagInput, setTextTagInput] = useState<string>("");
     const [colorTagInput, setColorTagInput] = useState<string>("#000000");
-    useEffect(() => {
-        console.log('isDescriptionEditable changed:', isDescriptionEditable);
-    }, [isDescriptionEditable]);
 
     const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTextCommentInput(e.target.value)
     }
-
     const handleCommentSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (textCommentInput.trim() && typeof activeTaskId === "string") {

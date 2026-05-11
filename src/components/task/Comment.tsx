@@ -1,7 +1,7 @@
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons/faCircleUser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Button from "./Button";
-import { useKanbanStore } from "../global/kanbanStore";
+import { useKanbanStore } from "../../store/kanbanStore";
+import Button from "../shared/Button";
 
 type CommentProps = {
   commentId: string;

@@ -1,20 +1,21 @@
+import Task from "../task/Task";
+import CreateTask from "../task/CreateTask";
+import TaskColumnOptionsModal from "../modals/TaskColumnOptionsModal";
+import type { ColumnType, TaskType } from '../../types';
+import { useState } from "react";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Task from "./Task";
-import CreateTask from "./CreateTask";
-import { useState } from "react";
-import { useKanbanStore, type Column, type Task as TaskType } from "../global/kanbanStore.ts";
-import TaskColumnOptionsModal from "./TaskColumnOptionsModal.tsx";
-import { useModalStore } from "../global/modalStore";
+import { useKanbanStore} from "../../store/kanbanStore.ts";
+import { useModalStore } from "../../store/modalStore";
 import { useDroppable, useDraggable } from "@dnd-kit/core";
 
 type TaskColumnProps = {
+    className?: string;
     onTaskOpen: () => void;
     search: string;
     key: string;
     title: string;
-    className?: string;
-    column: Column;
+    column: ColumnType;
 };
 
 const TaskColumn = ({ onTaskOpen, search, title, className, column, ...props }: TaskColumnProps) => {

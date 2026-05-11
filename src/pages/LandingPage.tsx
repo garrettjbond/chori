@@ -1,12 +1,12 @@
-import Navbar from '../components/Navbar';
-import Button from '../components/Button';
-import Card from '../components/Card';
-import SideNav from '../components/SideNav';
-import CreateBoardModal from '../components/CreateBoardModal';
-import BoardOptionsModal from '../components/BoardOptionsModal';
+import Navbar from '../components/shared/Navbar.tsx';
+import Button from '../components/shared/Button.tsx';
+import Card from '../components/landing/Card.tsx';
+import SideNav from '../components/landing/SideNav';
+import CreateBoardModal from '../components/modals/CreateBoardModal';
+import BoardOptionsModal from '../components/modals/BoardOptionsModal';
 import { useState, useEffect } from 'react';
-import { useKanbanStore } from '../global/kanbanStore.ts'
-import { useModalStore } from '../global/modalStore.ts';
+import { useKanbanStore } from '../store/kanbanStore.ts';
+import { useModalStore } from '../store/modalStore.ts';
 
 const LandingPage = () => {
   const { boards, initializeDefaultBoard } = useKanbanStore();

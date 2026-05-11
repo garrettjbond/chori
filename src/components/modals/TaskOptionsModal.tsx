@@ -1,8 +1,8 @@
 import { faClose, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useKanbanStore } from '../global/kanbanStore';
+import { useKanbanStore } from '../../store/kanbanStore';
 import { useState } from 'react';
-import Button from './Button';
+import Button from '../shared/Button';
 import Swal from 'sweetalert2';
 
 type TaskOptionsModalProps = {

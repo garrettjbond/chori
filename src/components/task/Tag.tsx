@@ -1,8 +1,7 @@
-import React from "react";
-import Button from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
-import { useKanbanStore } from "../global/kanbanStore";
+import { useKanbanStore } from "../../store/kanbanStore";
+import Button from "../shared/Button";
 
 type TagProps = {
     id: string;
@@ -11,7 +10,7 @@ type TagProps = {
     activeTaskId: string;
 };
 
-const Tag: React.FC<TagProps> = ({ id, title, color, activeTaskId }) => {
+const Tag = ({ id, title, color, activeTaskId }: TagProps) => {
     const { deleteTag } = useKanbanStore();
 
     return (

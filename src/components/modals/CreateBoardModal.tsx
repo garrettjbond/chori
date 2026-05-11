@@ -1,9 +1,9 @@
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from './Button';
-import { useKanbanStore } from '../global/kanbanStore';
+import { useKanbanStore } from '../../store/kanbanStore';
 import { useState } from 'react';
-import { useModalStore } from '../global/modalStore';
+import { useModalStore } from '../../store/modalStore';
+import Button from '../shared/Button';
 
 type CreateBoardProps = {
     className?: string;

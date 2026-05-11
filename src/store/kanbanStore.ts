@@ -1,48 +1,12 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-
-// ----- Types -----
-export type Tag = {
-  id: string;
-  title: string;
-  color: string;
-  createdBy?: string;
-};
-
-export type Comment = {
-  id: string;
-  createdBy: string;
-  createdDate: string;
-  description: string;
-};
-
-export type Task = {
-  id: string;
-  title: string;
-  description?: string;
-  assignee?: string;
-  tags?: Tag[];
-  comments?: Comment[];
-};
-
-export type Column = {
-  id: string;
-  title: string;
-  tasks: Task[];
-};
-
-export type Board = {
-  id: string;
-  title: string;
-  favorite: boolean;
-  columns: Column[];
-};
+import type { BoardType, ColumnType, TaskType, CommentType, TagType } from '../types';
 
 export type KanbanState = {
   activeBoardId: string | null;
   setActiveBoardId: (boardId: string | null) => void;
-  getActiveBoard: () => Board | null;
-  boards: Board[];
+  getActiveBoard: () => BoardType | null;
+  boards: BoardType[];
   initializeDefaultBoard: () => void;
   createBoard: (title: string) => void;
   renameBoard: (boardId: string, newTitle: string) => void;
@@ -51,7 +15,7 @@ export type KanbanState = {
 
   activeColumnId: string | null;
   setActiveColumnId: (columnId: string | null) => void;
-  getActiveColumn: () => Column | null;
+  getActiveColumn: () => ColumnType | null;
   createColumn: (boardId: string, title: string) => void;
   renameColumn: (boardId: string, columnId: string, newTitle: string) => void;
   deleteColumn: (boardId: string, columnId: string) => void;
@@ -59,9 +23,9 @@ export type KanbanState = {
 
   activeTaskId: string | null;
   setActiveTaskId: (taskId: string | null) => void;
-  getActiveTask: () => Task | null;
+  getActiveTask: () => TaskType | null;
   createTask: (columnId: string, title: string) => void;
-  updateTask: (columnId: string, taskId: string, updates: Partial<Task>) => void;
+  updateTask: (columnId: string, taskId: string, updates: Partial<TaskType>) => void;
   renameTask: (columnId: string, taskId: string, newTitle: string) => void;
   deleteTask: (columnId: string, taskId: string) => void;
   deleteAllTasks: (columnId: string) => void;
@@ -75,12 +39,12 @@ export type KanbanState = {
 
   activeCommentId: string | null;
   setActiveCommentId: (commentId: string | null) => void;
-  getActiveComment: () => Comment | null;
+  getActiveComment: () => CommentType | null;
   createComment: (taskId: string, description: string) => void;
   deleteComment: (commentId: string, taskId: string) => void;
 
   activeTagId: string | null;
-  getActiveTag: () => Tag | null;
+  getActiveTag: () => TagType | null;
   createTag: (taskId: string, title: string, color: string) => void;
   deleteTag: (tagId: string, taskId: string) => void;
 };
@@ -135,7 +99,7 @@ export const useKanbanStore = create<KanbanState>()(
         },
         createBoard: (title: string) =>
         set((state) => {
-          const newBoard: Board = { id: crypto.randomUUID(), title, favorite: false, columns: [] };
+          const newBoard: BoardType = { id: crypto.randomUUID(), title, favorite: false, columns: [] };
           return { boards: [...state.boards, newBoard], activeBoardId: newBoard.id };
         }),
       renameBoard: (boardId: string, newTitle: string) =>

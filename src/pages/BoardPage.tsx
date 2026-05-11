@@ -1,17 +1,16 @@
-import Taskbar from '../components/Taskbar';
-import TaskColumn from '../components/TaskColumn';
-import CreateColumn from '../components/CreateColumn';
-import BoardFooterNav from '../components/BoardFooterNav.tsx';
-import TaskInfoModal from '../components/TaskInfoModal';
-import BoardSwitchModal from '../components/BoardSwitchModal';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/shared/Navbar.tsx';
+import Taskbar from '../components/task/Taskbar.tsx';
+import TaskColumn from '../components/board/TaskColumn';
+import CreateColumn from '../components/board/CreateColumn';
+import BoardFooterNav from '../components/board/BoardFooterNav.tsx';
+import TaskInfoModal from '../components/modals/TaskInfoModal.tsx';
+import BoardSwitchModal from '../components/modals/BoardSwitchModal';
+import BoardOptionsModal from '../components/modals/BoardOptionsModal.tsx';
 import { useState } from 'react';
-import { useKanbanStore } from '../global/kanbanStore.ts'
-import { useModalStore } from '../global/modalStore.ts';
-import BoardOptionsModal from '../components/BoardOptionsModal.tsx';
+import { useKanbanStore } from '../store/kanbanStore.ts'
+import { useModalStore } from '../store/modalStore.ts';
 import { DndContext } from "@dnd-kit/core";
 import type { DragEndEvent } from "@dnd-kit/core";
-
 
 const BoardPage = () => {
   const { getActiveBoard, moveTask, moveColumn } = useKanbanStore();
@@ -56,7 +55,6 @@ const BoardPage = () => {
       }
     }
   };
-
 
   return (
     <div className="p-10 w-full h-full xl:px-60 lg:px-30 md:px-20">

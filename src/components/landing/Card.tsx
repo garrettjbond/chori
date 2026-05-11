@@ -2,7 +2,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faShapes } from "@fortawesome/free-solid-svg-icons/faShapes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import { useKanbanStore } from "../global/kanbanStore";
+import { useKanbanStore } from "../../store/kanbanStore";
 
 type CardProps = {
   className?: string;

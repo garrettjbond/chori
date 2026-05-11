@@ -1,11 +1,11 @@
 import { faCaretRight, faClose, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-import Button from './Button';
-import Comment from './Comment';
-import { useKanbanStore } from '../global/kanbanStore';
-import { useModalStore } from '../global/modalStore';
-import Tag from './Tag';
+import { useKanbanStore } from '../../store/kanbanStore';
+import { useModalStore } from '../../store/modalStore';
+import Button from '../shared/Button';
+import Comment from '../task/Comment';
+import Tag from '../task/Tag';
 
 type TaskInfoModalProps = {
     className?: string;

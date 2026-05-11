@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Button from "./Button";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { useKanbanStore } from "../global/kanbanStore";
-import { useModalStore } from "../global/modalStore";
+import { useKanbanStore } from "../../store/kanbanStore";
+import { useModalStore } from "../../store/modalStore";
+import Button from "../shared/Button";
 
 type CreateTaskProps = {
     isOpen: boolean;

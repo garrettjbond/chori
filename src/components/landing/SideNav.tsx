@@ -1,10 +1,10 @@
+import SideNavItem from "../landing/SideNavItem";
 import { faWindowMaximize } from "@fortawesome/free-solid-svg-icons/faWindowMaximize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SideNavItem from "./SideNavItem";
-import { type Board } from "../global/kanbanStore";
+import type { BoardType } from "../../types";
 
 type SideNavProps = {
-    boards: Board[];
+    boards: BoardType[];
 }
 
 const SideNav = ({ boards }: SideNavProps) => {

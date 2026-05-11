@@ -1,13 +1,12 @@
 import { faCaretRight, faEllipsis, faGear, faPeopleGroup, faStar, faUserPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import Button from "./Button"
-import { useKanbanStore, type Board } from "../global/kanbanStore";
+import type { BoardType } from "../../types";
+import { useKanbanStore } from "../../store/kanbanStore";
+import Button from "../shared/Button"
 
 type TaskbarProps = {
     onOptionsModalOpen: () => void;
 }
-
-
 
 const Taskbar = ({onOptionsModalOpen}:TaskbarProps) => {
     const {activeBoardId, boards, toggleFavoriteBoard, getActiveBoard} = useKanbanStore();
@@ -25,7 +24,7 @@ const Taskbar = ({onOptionsModalOpen}:TaskbarProps) => {
                     <p className="cursor-pointer hover:text-nurple duration-300"><span className='pl-3 pr-1'><FontAwesomeIcon className="text-darkAsh" icon={faCaretRight}></FontAwesomeIcon></span></p>
                     <p onClick={onOptionsModalOpen} className="cursor-pointer hover:text-nurple duration-300"><span className='pl-3 pr-1'><FontAwesomeIcon icon={faGear}></FontAwesomeIcon></span>Settings</p>
                     <p className="cursor-pointer hover:text-nurple duration-300"><span className='pl-3 pr-1'><FontAwesomeIcon icon={faPeopleGroup}></FontAwesomeIcon></span>Members</p>
-                    <p className={`cursor-pointer duration-300 ${boards.find((board: Board) => board.id === activeBoardId)?.favorite ? 'text-nurple hover:text-lavender' : 'text-darkAsh hover:text-lavender'}`} onClick={() => activeBoardId && toggleFavoriteBoard(activeBoardId)}><span className='pl-3 pr-1'><FontAwesomeIcon icon={faStar}/></span>Favorite</p>
+                    <p className={`cursor-pointer duration-300 ${boards.find((board: BoardType) => board.id === activeBoardId)?.favorite ? 'text-nurple hover:text-lavender' : 'text-darkAsh hover:text-lavender'}`} onClick={() => activeBoardId && toggleFavoriteBoard(activeBoardId)}><span className='pl-3 pr-1'><FontAwesomeIcon icon={faStar}/></span>Favorite</p>
                 </div>
             </div>
             <div className="flex items-center">

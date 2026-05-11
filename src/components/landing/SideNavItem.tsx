@@ -1,8 +1,8 @@
 import { faPeopleGroup, faGear, faCaretRight, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
-import { useKanbanStore } from "../global/kanbanStore";
-import { useModalStore } from "../global/modalStore";
+import { useState } from 'react';
+import { useKanbanStore } from "../../store/kanbanStore";
+import { useModalStore } from "../../store/modalStore";
 import Swal from "sweetalert2";
 
 type SideNavItemProps = {

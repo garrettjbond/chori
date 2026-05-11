@@ -1,11 +1,11 @@
 import { faGripVertical, faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { useKanbanStore } from "../global/kanbanStore";
-import { useModalStore } from "../global/modalStore";
-import TaskOptionsModal from "./TaskOptionsModal";
-import type { Task as TaskType } from "../global/kanbanStore";
+import { useKanbanStore } from "../../store/kanbanStore";
+import { useModalStore } from "../../store/modalStore";
 import { useDraggable } from "@dnd-kit/core";
+import type { TaskType } from "../../types";
+import TaskOptionsModal from "../modals/TaskOptionsModal";
 
 type TaskProps = {
     onOpen: () => void;

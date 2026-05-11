@@ -1,10 +1,10 @@
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
-import Button from './Button';
-import Card from './Card';
-import { useKanbanStore } from '../global/kanbanStore';
-import { useModalStore } from '../global/modalStore';
+import { useKanbanStore } from '../../store/kanbanStore';
+import { useModalStore } from '../../store/modalStore';
+import Button from '../shared/Button';
+import Card from '../landing/Card';
 
 type BoardSwitchProps = {
     className?: string;

@@ -1,9 +1,10 @@
 import { faClose, faPenToSquare, faPeopleGroup, faStar, faTrash, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from './Button';
 import { useState } from 'react';
-import { useKanbanStore, type Board } from '../global/kanbanStore';
-import { useModalStore } from '../global/modalStore';
+import { useKanbanStore} from '../../store/kanbanStore';
+import { useModalStore } from '../../store/modalStore';
+import type { BoardType } from '../../types';
+import Button from '../shared/Button';
 import Swal from 'sweetalert2';
 
 type BoardOptionsModalProps = {
@@ -75,7 +76,7 @@ const BoardOptionsModal = ({ className, ...props }: BoardOptionsModalProps) => {
                                             <Button type='submit' className='bg-nurple text-white hover:bg-lightNurple duration-300 cursor-pointer'>Save</Button>
                                         </form>}
                                     <li onClick={() => activeBoardId && toggleFavoriteBoard(activeBoardId)} className="flex items-center justify-between text-gray-500 p-2 hover:bg-lavender hover:text-gray-800 rounded cursor-pointer">
-                                        Favorite Board <FontAwesomeIcon className={`${boards.find((board: Board) => board.id === activeBoardId)?.favorite ? 'text-nurple hover:text-lavender' : 'text-darkAsh hover:text-lavender'}`} icon={faStar}></FontAwesomeIcon>
+                                        Favorite Board <FontAwesomeIcon className={`${boards.find((board: BoardType) => board.id === activeBoardId)?.favorite ? 'text-nurple hover:text-lavender' : 'text-darkAsh hover:text-lavender'}`} icon={faStar}></FontAwesomeIcon>
                                     </li>
                                     <button
                                         onClick={() => {

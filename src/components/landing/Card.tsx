@@ -15,7 +15,7 @@ const Card = ({ className, isFavorite, title, boardId }: CardProps) => {
   const { setActiveBoardId, toggleFavoriteBoard } = useKanbanStore();
 
   return (
-    <article onClick={() => setActiveBoardId(boardId)} className={`group rounded-xl mb-5 size-65 flex flex-shrink-0 flex-col shadow-md cursor-pointer ${className}`}>
+    <article onClick={() => setActiveBoardId(boardId)} className={`${className} group rounded-xl mb-5 size-65 flex flex-shrink-0 flex-col shadow-md cursor-pointer`}>
       <header onClick={() => toggleFavoriteBoard(boardId)} className="headerContainer rounded-t-xl border-ash border-t border-x flex flex-row justify-between items-center bg-snow h-17 px-3">
         <div className="flex items-center">
           <p className="hidden lg:flex lg:mr-3 rounded-full size-10 bg-lavender text-nurple font-bold items-center justify-center">A</p>

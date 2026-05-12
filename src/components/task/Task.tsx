@@ -22,7 +22,6 @@ const Task = ({ onOpen, index, task, taskId, title, columnId, className }: TaskP
     const { modals, closeModal, openModal } = useModalStore();
     const [isRenameOpen, setIsRenameOpen] = useState<boolean>(false);
 
-    // Draggable task
     const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
         id: taskId,
     });

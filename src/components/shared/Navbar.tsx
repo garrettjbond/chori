@@ -19,10 +19,10 @@ const Navbar = ({onSearchChange}: NavbarProps) => {
   return (
     <header className="fixed top-0 h-16 left-0 w-full flex justify-between p-2 border-b-5 border-lavender xl:px-60 lg:px-30 md:px-20">
         <div className='flex items-center justify-start'>
-            <Link to="/" aria-label='Chori home' className='cursor-pointer hover:text-nurple duration-300'>
+            <Link to="/" aria-label='Chori home' className='cursor-pointer hover:text-nurple focus:text-nurple duration-300 focus:outline-none focus:ring-2 focus:ring-nurple rounded'>
                 <span className="flex items-center">
                     <FontAwesomeIcon icon={faFlipboard} className="text-4xl" aria-hidden="true"/>
-                    <h1 className="hidden lg:block text-4xl font-bold pl-2">Chori</h1>
+                    <span className="hidden lg:block text-4xl font-bold pl-2">Chori</span>
                 </span>
             </Link>
         </div>
@@ -34,7 +34,7 @@ const Navbar = ({onSearchChange}: NavbarProps) => {
                 <label htmlFor="board-search" className='sr-only'>Search boards</label>
                 <input
                     id='board-search'
-                    className="rounded-full border-2 text-black border-gray-300 h-10 pl-3 md:pl-10 w-full"
+                    className="rounded-full border-2 text-black border-gray-300 focus:border-nurple focus:outline-none h-10 pl-3 md:pl-10 w-full"
                     type="text"
                     placeholder="Search"
                     onChange={handleChange}
@@ -42,7 +42,7 @@ const Navbar = ({onSearchChange}: NavbarProps) => {
                 />
             </div>
         </form>
-        <button aria-label='User profile' className='flex items-center justify-end'>
+        <button aria-label='User profile' className='flex items-center justify-end focus:outline-none focus:ring-2 focus:ring-nurple rounded-full'>
             <FontAwesomeIcon aria-hidden="true" className='text-4xl text-nurple hover:text-lightNurple duration-300 cursor-pointer' icon={faCircleUser}/>
         </button>
     </header>

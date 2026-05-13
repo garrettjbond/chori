@@ -6,7 +6,7 @@ import BoardFooterNav from '../components/board/BoardFooterNav.tsx';
 import TaskInfoModal from '../components/modals/TaskInfoModal.tsx';
 import BoardSwitchModal from '../components/modals/BoardSwitchModal';
 import BoardOptionsModal from '../components/modals/BoardOptionsModal.tsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useKanbanStore } from '../store/kanbanStore.ts'
 import { useModalStore } from '../store/modalStore.ts';
 import { DndContext } from "@dnd-kit/core";
@@ -16,9 +16,12 @@ const BoardPage = () => {
   const { getActiveBoard, moveTask, moveColumn } = useKanbanStore();
   const { openModal } = useModalStore();
   const [searchTerm, setSearchTerm] = useState<string>("");
-
   const activeBoard = getActiveBoard();
   if (!activeBoard) return null;
+
+  useEffect(() => {
+    document.title = `${activeBoard.title} | Chori`;
+  }, [activeBoard.title]);
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -66,9 +69,9 @@ const BoardPage = () => {
           <div className='flex flex-row overflow-x-auto min-h-95 gap-5'>
             {
               activeBoard.columns
-              .map(column => (
-                <TaskColumn onTaskOpen={() => openModal('taskInfo')} search={searchTerm} key={column.id} column={column} title={column.title} />
-              ))
+                .map(column => (
+                  <TaskColumn onTaskOpen={() => openModal('taskInfo')} search={searchTerm} key={column.id} column={column} title={column.title} />
+                ))
             }
             <CreateColumn ></CreateColumn>
           </div>

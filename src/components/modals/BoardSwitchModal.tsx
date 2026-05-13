@@ -38,6 +38,7 @@ const BoardSwitchModal = ({ className, ...props }: BoardSwitchProps) => {
                             <div className='px-5 pt-5 flex flex-col h-full'>
                                 <div className='inputContainer relative flex-shrink-0 sm:mx-auto sm:w-3/4'>
                                     <input
+                                        autoFocus
                                         type="text"
                                         className='pl-4 border border-gray-300 w-full h-9 rounded-full'
                                         placeholder='Search your boards'

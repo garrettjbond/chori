@@ -43,7 +43,7 @@ const CreateBoardModal = ({ className, ...props }: CreateBoardProps) => {
                         </header>
                         <form onSubmit={handleSubmit} className="rounded-md flex flex-col px-6 py-5">
                             <label htmlFor="create-board-name" className='sr-only'>Board name</label>
-                            <input required id='create-board-name' maxLength={25} onChange={handleChange} value={textInput} type="text" placeholder="Enter Board name..." className="pl-3 h-10 bg-white border border-gray-300 w-full rounded-sm" />
+                            <input autoFocus required id='create-board-name' maxLength={25} onChange={handleChange} value={textInput} type="text" placeholder="Enter Board name..." className="pl-3 h-10 bg-white border border-gray-300 w-full rounded-sm" />
                             <div className="flex justify-between pt-5">
                                 <Button type='submit' className="bg-nurple text-white hover:bg-lightNurple duration-300" >Add Board</Button>
                             </div>

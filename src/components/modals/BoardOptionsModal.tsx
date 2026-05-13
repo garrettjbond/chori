@@ -72,7 +72,7 @@ const BoardOptionsModal = ({ className, ...props }: BoardOptionsModalProps) => {
                                             <label htmlFor="rename-board-input" className="sr-only">
                                                 New board name
                                             </label>
-                                            <input id='rename-board-input' required maxLength={15} value={renameInputValue} onChange={handleRenameChange} type="text" placeholder={activeBoard.title} className='pl-3 h-10 bg-white border border-gray-300 w-full rounded-sm' />
+                                            <input autoFocus id='rename-board-input' required maxLength={15} value={renameInputValue} onChange={handleRenameChange} type="text" placeholder={activeBoard.title} className='pl-3 h-10 bg-white border border-gray-300 w-full rounded-sm' />
                                             <Button type='submit' className='bg-nurple text-white hover:bg-lightNurple duration-300 cursor-pointer'>Save</Button>
                                         </form>}
                                     <li onClick={() => activeBoardId && toggleFavoriteBoard(activeBoardId)} className="flex items-center justify-between text-gray-500 p-2 hover:bg-lavender hover:text-gray-800 rounded cursor-pointer">
@@ -121,7 +121,7 @@ const BoardOptionsModal = ({ className, ...props }: BoardOptionsModalProps) => {
                                             <label htmlFor="share-board-email" className="sr-only">
                                                 Email address to share with
                                             </label>
-                                            <input id='share-board-email' required type="text" placeholder='email' className='pl-3 h-10 bg-white border border-gray-300 w-full rounded-sm' />
+                                            <input autoFocus id='share-board-email' required type="text" placeholder='email' className='pl-3 h-10 bg-white border border-gray-300 w-full rounded-sm' />
                                             <Button
                                                 onClick={() => {
                                                     const confirmed = window.confirm("This functionality has not been implemented yet.");

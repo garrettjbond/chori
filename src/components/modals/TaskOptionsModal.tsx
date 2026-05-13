@@ -60,7 +60,7 @@ const TaskOptionsModal = ({ isRename, index, setIsRename, taskId, columnId, isOp
                     </li>
                     {isRename &&
                         <form onSubmit={handleSubmit} className='flex mx-1 gap-5 sm:px-2'>
-                            <input value={renameInputValue} onChange={handleRenameChange} type="text" placeholder="task title" className='pl-3 h-10 bg-white border border-gray-300 w-full rounded-sm' />
+                            <input required autoFocus value={renameInputValue} onChange={handleRenameChange} type="text" placeholder="task title" className='pl-3 h-10 bg-white border border-gray-300 w-full rounded-sm' />
                             <Button type='submit' className='bg-nurple text-white hover:bg-lightNurple duration-300 cursor-pointer'>Save</Button>
                         </form>}                    <li
                             onClick={() => {

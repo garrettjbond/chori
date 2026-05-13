@@ -18,12 +18,12 @@ const Card = ({ className, isFavorite, title, boardId }: CardProps) => {
     <article onClick={() => setActiveBoardId(boardId)} className={`${className} group rounded-xl mb-5 size-65 flex flex-shrink-0 flex-col shadow-md cursor-pointer`}>
       <header onClick={() => toggleFavoriteBoard(boardId)} className="headerContainer rounded-t-xl border-ash border-t border-x flex flex-row justify-between items-center bg-snow h-17 px-3">
         <div className="flex items-center">
-          <p className="hidden lg:flex lg:mr-3 rounded-full size-10 bg-lavender text-nurple font-bold items-center justify-center">A</p>
-          <h3 className="font-semibold"><Link to={`/board/${boardId}`} aria-label={`Open ${title} board`}>
+          <span aria-label="Board Initial" className="hidden lg:flex lg:mr-3 rounded-full size-10 bg-lavender text-nurple font-bold items-center justify-center">{title.charAt(0).toUpperCase()}</span>
+          <h3 className="font-semibold"><Link className="focus:outline-none focus:ring-2 focus:ring-nurple rounded" to={`/board/${boardId}`} aria-label={`Open ${title} board`}>
             {title}
           </Link></h3>
         </div>
-        <button onClick={() => toggleFavoriteBoard(boardId)}
+        <button className="focus:outline-none focus:ring-2 focus:ring-nurple rounded-full" onClick={() => toggleFavoriteBoard(boardId)}
           aria-label={isFavorite ? `Remove ${title} from favorites` : `Add ${title} to favorites`}
           aria-pressed={isFavorite}>
           <FontAwesomeIcon icon={faStar} aria-hidden="true"
